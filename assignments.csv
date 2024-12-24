@@ -1,0 +1,6 @@
+AssignmentID,EmployeeID,ProjectID,Role,AssignedDate
+1,2,1,"Lead Developer",2023-01-05
+2,5,1,"Junior Developer",2023-01-10
+3,4,2,"Campaign Manager",2023-02-10
+4,6,2,"Marketing Assistant",2023-02-15
+5,3,3,Accountant,2023-03-20

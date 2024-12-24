@@ -1,0 +1,9 @@
+EmployeeID,FullName,Position,Salary,HiredDate,DepartmentID
+1,"Alice Johnson","HR Manager",75000.00,2018-03-15,1
+2,"Bob Smith","Software Engineer",120000.00,2020-06-10,2
+3,"Charlie Davis",Accountant,65000.00,2019-09-01,3
+4,"Dana White","Marketing Specialist",70000.00,2021-01-20,4
+5,"Eve Adams","Junior Developer",120000.00,2021-05-10,2
+6,"Frank Brown","Marketing Intern",30000.00,2023-02-01,4
+7,"Grace Miller","Data Analyst",120000.00,2023-04-10,2
+8,"Michel Willies","Software Engineer",70000.00,2024-04-15,2

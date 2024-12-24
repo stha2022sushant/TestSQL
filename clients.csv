@@ -1,0 +1,4 @@
+ClientID,ClientName,ContactName,Phone,Email,Address
+1,"Tech Solutions","John Carter",555-1234,john@techsolutions.com,"123 Tech St"
+2,FinanceCorp,"Sarah Lee",555-5678,sarah@financecorp.com,"456 Finance Ave"
+3,GreenWorks,"Emily Clark",555-9876,emily@greenworks.com,"789 Green Rd"
