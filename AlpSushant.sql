@@ -93,6 +93,236 @@ INSERT INTO Assignments (EmployeeID, ProjectID, Role, AssignedDate) VALUES
 (3, 3, 'Accountant', '2023-03-20');
 
 
+-- Let's see available data in all the tables
+
+SELECT * from Employee;
+SELECT * FROM Projects;
+SELECT * FROM Clients;
+SELECT * FROM Assignments;
+
+
+-- inserting data into Employee() table
+
+
+
+INSERT INTO Employee
+(FullName, Position, Salary, HiredDate, DepartmentID) 
+VALUES ('Grace Miller', 'Data Analyst', 80000, '2023-04-10', 2);
+
+
+
+INSERT INTO Projects 
+(ProjectName, StartDate, EndDate, Budget, DepartmentID, ClientID) 
+VALUES
+ ('AI Integration', '2023-05-01', '2023-12-31', 150000, 2, 1);
+ 
+ 
+SELECT ProjectName, StartDate, EndDate, Budget
+FROM Projects
+WHERE DepartmentID = 2;
+
+-- update salary of employee specified by by employee id 
+
+UPDATE Employee
+SET Salary = 90000
+WHERE EmployeeID = 2;
+
+UPDATE Employee 
+SET Salary = 120000
+WHERE DepartmentID = 2; -- Replace with the desired EmployeeID
+
+SELECT * FROM Employee;
+
+
+UPDATE Projects
+SET Budget = 200000
+WHERE ProjectID = 1;
+
+SELECT e.FullName, e.Position, d.DepartmentName
+FROM Employee e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+SELECT p.ProjectName, p.StartDate, p.EndDate, c.ClientName
+FROM Projects p 
+JOIN Clients c ON p.ClientID = c.ClientID;
+
+
+-- Get Project Assignment 
+
+SELECT p.ProjectName, e.FullName, a.Role, a.AssignedDate
+FROM Assignments a 
+JOIN Employee e ON a.EmployeeID = e.EmployeeID
+JOIN Projects p ON a.ProjectID = p.ProjectID; 
+
+-- Calculation of total salary by department
+
+
+SELECT d.DepartmentName, SUM(e.Salary) AS TotalSalaries
+FROM Employee e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID
+GROUP BY d.DepartmentName;
+
+
+-- Calculating highest paying categoreies
+
+SELECT ProjectName, Budget
+From Projects
+ORDER BY Budget DESC;
+
+-- For getting highest paying catagories
+
+SELECT ProjectName, Budget
+From Projects
+ORDER BY Budget DESC
+LIMIT 1;
+
+
+-- To list employee working in specific project
+
+SELECT e.FullName, e.Position, a.Role
+FROM Assignments a 
+JOIN Employee e ON a.EmployeeID = e.EmployeeID
+WHERE a.ProjectID = 1;
+
+
+-- creating views from the existing tables 
+
+
+CREATE VIEW EmployeeProjects AS
+SELECT e.FullName, p.ProjectName, a.Role
+FROM Assignments a 
+JOIN Employee e ON a.EmployeeID = e.EmployeeID
+JOIN Projects p ON a.ProjectID = p.ProjectID;
+
+SELECT * FROM EmployeeProjects;
+
+/*
+
+This query is not valid with logic as , we cannot INSERT into view that contains joins
+
+
+INSERT INTO EmployeeProjects
+(FullName, ProjectName, Role)
+VALUES
+('Srijal', 'Data Science', 'Data Sceintist'); 
+
+*/
+
+
+
+
+
+SELECT COUNT(FullName) FROM Employee;
+
+SELECT SUM(Salary) FROM Employee;
+
+select * from Employee;
+
+SELECT COUNT(*) AS total_records FROM employee;
+
+SELECT AVG(Salary) FROM Employee;
+
+SELECT avg(Salary) AS AverageSalary FROM Employee;
+
+SELECT MAX(Salary) AS MaximumSalary FROM Employee;
+
+-- minimum salary
+
+SELECT MIN(Salary) AS MinimumSalary FROM Employee;
+
+
+-- with no alias
+-- with alias
+
+SELECT ProjectName AS FilterData FROM Projects
+WHERE StartDate = '2023-01-01';
+
+
+-- Retriving Data from table using Between() function\
+SELECT * FROM Projects
+WHERE StartDate BETWEEN '2023-01-01' AND '2023-12-01';
+
+
+SELECT position, count(*) as GroupBy
+FROM Employee
+GROUP BY Position;
+
+SELECT * FROM Departments;
+
+INSERT INTO Employee
+(FullName, Position, Salary, HiredDate, DepartmentID)
+VALUES
+('Michel Willies', 'Software Engineer', 70000, '2024-04-15', 2);
+
+
+SELECT DepartmentID, count(*) as GroupBy
+FROM Employee
+GROUP BY DepartmentID;
+
+
+-- for calculation of total salary of the respective deparment
+
+SELECT DepartmentID, SUM(Salary) AS DepartmentSalary
+From Employee
+GROUP BY DepartmentID;
+
+SELECT p.ProjectName, p.StartDate, p.EndDate, c.ClientName
+FROM Projects p 
+JOIN Clients c ON p.ClientID = c.ClientID;
+
+SELECT * from Departments;
+
+SELECT DepartmentID, SUM(Salary) AS DepartmentSalary
+From Employee
+GROUP BY DepartmentID;
+
+SELECT Position, SUM(Salary) AS DepartmentSalary
+From Employee
+GROUP BY Position;
+
+SELECT d.DepartmentID, e.EmployeeID, e.FullName, e.Position, e.Salary, e.HiredDate, d.DepartmentName
+FROM Departments d
+JOIN Employee e ON e.DepartmentID = d.DepartmentID; 
+
+SELECT d.DepartmentID, e.EmployeeID, e.FullName, e.Position, e.Salary, e.HiredDate, d.DepartmentName, a.Role, a.AssignedDate
+FROM Employee e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID
+JOIN Assignments a ON e.EmployeeID = a.EmployeeID;
+
+SELECT e.DepartmentID, d.DepartmentName,e.Salary
+FROM Employee e 
+JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+
+-- Interesting Concept 
+
+
+SELECT e.DepartmentID, d.DepartmentName, SUM(e.Salary) AS TotalSalary
+FROM Employee e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID
+GROUP BY e.DepartmentID, d.DepartmentName
+ORDER BY TotalSalary DESC;
+-- LIMIT 1;, remove this line if you want to print all the obtained result
+
+SELECT e.DepartmentID, d.DepartmentName, (e.Salary) AS TotalSalary
+FROM Employee e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID
+GROUP BY e.DepartmentID, d.DepartmentName
+ORDER BY AVG(TotalSalary) DESC;
+
+
+
+
+SELECT AVG(DepartmentTotal.TotalSalary) AS AverageDepartmentSalary
+FROM (
+    SELECT e.DepartmentID, SUM(e.Salary) AS TotalSalary
+    FROM Employee e
+    GROUP BY e.DepartmentID
+) AS DepartmentTotal;
+
+
+
+
 
 
 
